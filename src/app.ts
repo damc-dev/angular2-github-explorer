@@ -6,30 +6,25 @@ import {Repo} from "./repository";
     selector: 'my-app',
     directives: [CORE_DIRECTIVES],
     template: `
-        <h1>Favorited Repositories</h1>
-        <div class="repositories">
-            <div class="repository" *ng-for="#repo of repositories">
-               <div class="user">
-                <img class="avatar" [src]="repo.owner.avatar_url" />
-                <h4>{{repo.owner.name}}</h4>
+        <div class="container">
+            <h1>Favorited Repositories</h1>
+            <div class="repositories">
+                <div class="repository media" *ng-for="#repo of repositories">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="avatar" [src]="repo.owner.avatar_url" />
+
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading"> {{repo.owner.name}}/{{repo.name}}</h4>
+                        <p>{{repo.description}}</p>
+                    </div>
                </div>
-                <h3>{{repo.name}}</h3>
-                <p>{{repo.description}}</p>
             </div>
         </div>
     `,
     styles: [`
-
-        .repository {
-            display:block;
-            width: 100%;
-            overflow: auto;
-            margin: 30px;
-        }
-        .user {
-            width: 30%;
-            float:left;
-        }
         .avatar {
             width:75px;
             height:75px;

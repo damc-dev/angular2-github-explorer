@@ -16,9 +16,9 @@
 * Load all favorites from GitHub, currently only loads a single page (100 results)
 * Add search filtering by repository name
 * Add filters for
-** language
-** owner
-** OrderBy stars
+  * language
+  * owner
+  * OrderBy stars
 * Extract api logic into service module
 
 ## Built From

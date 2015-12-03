@@ -1,16 +1,17 @@
-# ng2-play.ts
+# Angular2-GitHub-Explorer
 
-A minimal [Angular2](https://angular.io/) playground using [TypeScript](http://www.typescriptlang.org/) and [SystemJS loader](https://github.com/systemjs/systemjs)
+## Getting Started
 
-## Install
-
-Clone this repo and execute in your favourite shell:
+### Install
 
 * `npm i -g gulp` to install gulp globally (if you don't have it installed already)
 * `npm i` to install local npm dependencies
 
-## Play
+### Start
 
-After completing installation type in your favourite shell:
+* `gulp start`
 
-* `gulp play` to start a "Hello World" app in a new browser window. App files are observed and will be re-transpiled on each change.
+## Built From
+
+### ng2-play.ts
+A minimal [Angular2](https://angular.io/) playground using [TypeScript](http://www.typescriptlang.org/) and [SystemJS loader](https://github.com/systemjs/systemjs)

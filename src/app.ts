@@ -7,8 +7,8 @@ import {Repo} from "./repository";
     directives: [CORE_DIRECTIVES],
     template: `
         <div class="container">
-            <h1>Starred Repositories</h1>
             <div class="repositories">
+                <h1>Starred Repositories</h1>
                 <div class="repository media" *ng-for="#repo of repositories">
                     <div class="media-left">
                         <a href="#">
@@ -20,6 +20,11 @@ import {Repo} from "./repository";
 
                         <h4 class="media-heading">
                             <a href="{{repo.owner.url}}">{{repo.owner.name}}</a> / <a href="{{repo.url}}" >{{repo.name}}</a>
+                            <small>
+                                <div class="star-count">
+                                    <span class="glyphicon glyphicon-star"/> {{repo.stargazers_count}}
+                                </div>
+                            </small>
                         </h4>
                         <p>{{repo.description}}</p>
                     </div>
@@ -28,9 +33,15 @@ import {Repo} from "./repository";
         </div>
     `,
     styles: [`
+        .container {
+            max-width:700px;
+         }
         .avatar {
             width:75px;
             height:75px;
+        }
+        .star-count {
+            float: right;
         }
     `]
 })
@@ -62,7 +73,8 @@ export class AppComponent {
                             url: repo.owner.html_url,
                             avatar_url: repo.owner.avatar_url
                         },
-                        description: repo.description
+                        description: repo.description,
+                        stargazers_count: repo.stargazers_count
                     };
                     this.repositories.push(repository);
                 }

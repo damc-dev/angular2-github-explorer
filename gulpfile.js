@@ -20,7 +20,7 @@ gulp.task('ts2js', function () {
     return tsResult.js.pipe(gulp.dest('dist'));
 });
 
-gulp.task('play', ['ts2js'], function () {
+gulp.task('start', ['ts2js'], function () {
     var http = require('http');
     var connect = require('connect');
     var serveStatic = require('serve-static');
@@ -36,4 +36,4 @@ gulp.task('play', ['ts2js'], function () {
     });
 });
 
-gulp.task('default', ['play']);
+gulp.task('default', ['start']);

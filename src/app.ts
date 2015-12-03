@@ -3,7 +3,7 @@ import {HTTP_PROVIDERS, Http} from "angular2/http";
 import {Repo} from "./repository";
 
 @Component({
-    selector: 'hello-app',
+    selector: 'my-app',
     directives: [CORE_DIRECTIVES],
     template: `
         <h1>Favorited Repositories</h1>
@@ -37,9 +37,8 @@ import {Repo} from "./repository";
 
     `]
 })
-export class HelloApp {
+export class AppComponent {
     repositories: Array<Repo> = [];
-    name:string = 'World';
     http:Http;
 
     constructor(http:Http) {
@@ -71,11 +70,9 @@ export class HelloApp {
                     console.log(repository);
                     this.repositories.push(repository);
                 }
-                this.name = data.json()[0].name;
-                console.log(this.name);
             }
         );
     }
 }
 
-bootstrap(HelloApp, [HTTP_PROVIDERS]);
+bootstrap(AppComponent, [HTTP_PROVIDERS]);

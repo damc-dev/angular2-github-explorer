@@ -7,7 +7,7 @@ import {Repo} from "./repository";
     directives: [CORE_DIRECTIVES],
     template: `
         <div class="container">
-            <h1>Favorited Repositories</h1>
+            <h1>Starred Repositories</h1>
             <div class="repositories">
                 <div class="repository media" *ng-for="#repo of repositories">
                     <div class="media-left">
@@ -17,7 +17,10 @@ import {Repo} from "./repository";
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading"> {{repo.owner.name}}/{{repo.name}}</h4>
+
+                        <h4 class="media-heading">
+                            <a href="{{repo.owner.url}}">{{repo.owner.name}}</a> / <a href="{{repo.url}}" >{{repo.name}}</a>
+                        </h4>
                         <p>{{repo.description}}</p>
                     </div>
                </div>
@@ -29,7 +32,6 @@ import {Repo} from "./repository";
             width:75px;
             height:75px;
         }
-
     `]
 })
 export class AppComponent {
@@ -53,7 +55,7 @@ export class AppComponent {
                         id: repo.id,
                         name: repo.name,
                         full_name: repo.full_name,
-                        url: repo.url,
+                        url: repo.html_url,
                         owner: {
                             id: repo.owner.id,
                             name: repo.owner.login,
@@ -62,7 +64,6 @@ export class AppComponent {
                         },
                         description: repo.description
                     };
-                    console.log(repository);
                     this.repositories.push(repository);
                 }
             }

@@ -1,4 +1,6 @@
-import {Component, bootstrap, CORE_DIRECTIVES} from 'angular2/angular2';
+import {Component} from 'angular2/core';
+import {bootstrap} from 'angular2/platform/browser';
+import {CORE_DIRECTIVES} from 'angular2/common';
 import {HTTP_PROVIDERS, Http} from "angular2/http";
 import {Repo} from "./repository";
 
@@ -9,7 +11,7 @@ import {Repo} from "./repository";
         <div class="container">
             <div class="repositories">
                 <h1>Starred Repositories</h1>
-                <div class="repository media" *ng-for="#repo of repositories">
+                <div class="repository media" *ngFor="#repo of repositories">
                     <div class="media-left">
                         <a href="#">
                             <img class="avatar" [src]="repo.owner.avatar_url" />
@@ -22,7 +24,7 @@ import {Repo} from "./repository";
                             <a href="{{repo.owner.url}}">{{repo.owner.name}}</a> / <a href="{{repo.url}}" >{{repo.name}}</a>
                             <small>
                                 <div class="star-count">
-                                    <span class="glyphicon glyphicon-star"/> {{repo.stargazers_count}}
+                                    <span class="glyphicon glyphicon-star"></span> {{repo.stargazers_count}}
                                 </div>
                             </small>
                         </h4>

@@ -1,50 +1,21 @@
 import {Component} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
-import {CORE_DIRECTIVES} from 'angular2/common';
 import {HTTP_PROVIDERS, Http} from "angular2/http";
 import {Repo} from "./repository";
+import {RepoList} from "./repo_list"
 
 @Component({
     selector: 'my-app',
-    directives: [CORE_DIRECTIVES],
+    directives: [RepoList],
     template: `
         <div class="container">
-            <div class="repositories">
-                <h1>Starred Repositories</h1>
-                <div class="repository media" *ngFor="#repo of repositories">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="avatar" [src]="repo.owner.avatar_url" />
-
-                        </a>
-                    </div>
-                    <div class="media-body">
-
-                        <h4 class="media-heading">
-                            <a href="{{repo.owner.url}}">{{repo.owner.name}}</a> / <a href="{{repo.url}}" >{{repo.name}}</a>
-                            <small>
-                                <div class="star-count">
-                                    <span class="glyphicon glyphicon-star"></span> {{repo.stargazers_count}}
-                                </div>
-                            </small>
-                        </h4>
-                        <p>{{repo.description}}</p>
-                    </div>
-               </div>
-            </div>
+          <repo-list [repositories]="repositories"></repo-list>
         </div>
     `,
     styles: [`
         .container {
             max-width:700px;
          }
-        .avatar {
-            width:75px;
-            height:75px;
-        }
-        .star-count {
-            float: right;
-        }
     `]
 })
 export class AppComponent {

@@ -2,14 +2,18 @@ import {Component} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
 import {HTTP_PROVIDERS, Http} from "angular2/http";
 import {Repo} from "./repository";
-import {RepoList} from "./repo_list"
+import {RepoList} from "./repo_list";
+import {SearchForm} from "./search_form";
+import {SearchCriteria} from "./search_criteria";
 
 @Component({
     selector: 'my-app',
-    directives: [RepoList],
+    directives: [RepoList, SearchForm],
     template: `
         <div class="container">
-          <repo-list [repositories]="repositories"></repo-list>
+          <h1>Starred Repositories</h1>
+          <search-form (searchCriteria)="filterRepos($event)"></search-form>
+          <repo-list [repositories]="repositories" [searchCriteria]="searchCriteria"></repo-list>
         </div>
     `,
     styles: [`
@@ -20,11 +24,13 @@ import {RepoList} from "./repo_list"
 })
 export class AppComponent {
     repositories: Array<Repo> = [];
+    searchCriteria: SearchCriteria;
     http:Http;
 
     constructor(http:Http) {
         this.http = http;
         this.getFavoritedRepositories();
+        this.searchCriteria = new SearchCriteria();
     }
 
     getFavoritedRepositories() {
@@ -53,6 +59,10 @@ export class AppComponent {
                 }
             }
         );
+    }
+    filterRepos(criteria: SearchCriteria) {
+      this.searchCriteria = criteria;
+      console.log(this.searchCriteria);
     }
 }
 

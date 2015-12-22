@@ -15,6 +15,7 @@ export class Repo {
     full_name:string;
     owner:Owner;
     url:string;
+    language: string;
     description: string;
     stargazers_count:number;
 }

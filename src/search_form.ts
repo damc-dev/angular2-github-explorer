@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter} from 'angular2/core';
+import {Component, Input, Output, EventEmitter} from 'angular2/core';
 import {SearchCriteria} from './search_criteria';
 @Component({
   selector: 'search-form',
@@ -14,22 +14,47 @@ import {SearchCriteria} from './search_criteria';
           </div>
         </div>
       </form>
+      <label>Labels:</label>
+      <button class="btn btn-{{isActiveLanguage(language) ? 'primary' : 'default'}}" type="button" *ngFor="#language of languages" (click)="toggleLanguage(language)" >
+         {{language}}
+      </button>
     </div>
   </div>
   `
   })
 
 export class SearchForm {
+  @Input() languages:string[] = [];
   @Output() searchCriteria = new EventEmitter<SearchCriteria>();
   containsCriteria: string = '';
+  languageCriteria: string[] = [];
 
   search() {
-      this.searchCriteria.next({contains:this.containsCriteria});
+      var criteria = {contains:this.containsCriteria, languages:this.languageCriteria};
+      this.searchCriteria.next(criteria);
   }
-  clearSearch() {
-    this.searchCriteria.next({contains:null});
-    this.containsCriteria = "";
 
+  clearSearch() {
+    this.containsCriteria = "";
+    this.languageCriteria = [];
+    this.search();
+  }
+
+  toggleLanguage(language:string) {
+    var index = this.languageCriteria.indexOf(language);
+    if ( index == -1) {
+      this.languageCriteria.push(language);
+    } else {
+      this.languageCriteria.splice(index, 1)
+    }
+    this.search();
+  }
+
+  isActiveLanguage(language:string) {
+    if (this.languageCriteria.indexOf(language) != -1) {
+      return true;
+    }
+    return false;
   }
 
 }

@@ -12,7 +12,7 @@ import {SearchCriteria} from "./search_criteria";
     template: `
         <div class="container">
           <h1>Starred Repositories</h1>
-          <search-form (searchCriteria)="filterRepos($event)"></search-form>
+          <search-form (searchCriteria)="filterRepos($event)" [languages]="languages"></search-form>
           <repo-list [repositories]="repositories" [searchCriteria]="searchCriteria"></repo-list>
         </div>
     `,
@@ -25,7 +25,10 @@ import {SearchCriteria} from "./search_criteria";
 export class AppComponent {
     repositories: Array<Repo> = [];
     searchCriteria: SearchCriteria;
+    languages: string[] = [];
+    searchLanguages: string[] = [];
     http:Http;
+
 
     constructor(http:Http) {
         this.http = http;
@@ -52,17 +55,21 @@ export class AppComponent {
                             url: repo.owner.html_url,
                             avatar_url: repo.owner.avatar_url
                         },
+                        language: repo.language,
                         description: repo.description,
                         stargazers_count: repo.stargazers_count
                     };
                     this.repositories.push(repository);
+                    if (repo.language && this.languages.indexOf(repo.language) == -1) {
+                      this.languages.push(repo.language);
+                    }
                 }
             }
         );
     }
     filterRepos(criteria: SearchCriteria) {
       this.searchCriteria = criteria;
-      console.log(this.searchCriteria);
+      console.log("Filter Repos by: ", this.searchCriteria);
     }
 }
 

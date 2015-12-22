@@ -10,7 +10,7 @@ import {Contains} from "./pipes/contains";
   pipes: [Contains],
   template: `
   <div class="repositories">
-      <div class="repository media" *ngFor="#repo of repositories | contains:'name':searchCriteria.contains">
+      <div class="repository media" *ngFor="#repo of repositories | contains:'name':searchCriteria.contains | contains:'language':searchCriteria.languages">
           <div class="media-left">
               <a href="#">
                   <img class="avatar" [src]="repo.owner.avatar_url" />
